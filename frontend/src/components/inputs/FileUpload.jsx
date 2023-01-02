@@ -29,6 +29,7 @@ function FileUpload({ setImages, images, setFormData, formData }) {
         }) => (
           <div className="upload__image-wrapper">
             <button
+              onChange={onchangeHandler}
               className="border text-gray-50 mr-5 "
               style={{
                 backgroundColor: isDragging ? 'green' : '#fff',

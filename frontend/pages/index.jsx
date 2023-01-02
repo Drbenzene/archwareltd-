@@ -36,6 +36,7 @@ export default function Home() {
       [name]: value,
       campaignStartDate: startDate,
       campaignEndDate: endDate,
+      imageList: images,
     })
     // imageUrls = [...imageList.data_url]
     console.log(formdata, 'THE FORM DATA')
@@ -134,6 +135,7 @@ export default function Home() {
               formData={formdata}
               images={images}
               setImages={setImages}
+              onChange={onChangeHandler}
             />
           </div>
 
