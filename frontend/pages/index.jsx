@@ -18,8 +18,6 @@ export default function Home() {
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(false)
 
-  let imageUrls = []
-
   const [formdata, setFormData] = useState({
     name: '',
     dailyBudget: '',
@@ -38,19 +36,17 @@ export default function Home() {
       campaignEndDate: endDate,
       imageList: images,
     })
-    // imageUrls = [...imageList.data_url]
-    console.log(formdata, 'THE FORM DATA')
-    console.log(imageUrls, 'THE URLS')
   }
 
   //Make API CALL ON FORM SUBMIT
 
   const onSubmit = async () => {
+    setLoading(true)
     setFormData({
       ...formdata,
       imageList: images,
     })
-    console.log(formdata, 'THE SUBMITTED')
+
     try {
       const res = await axios.post(
         'https://archwareltd-apii.onrender.com/api/campaign/create',
@@ -73,8 +69,10 @@ export default function Home() {
       setTimeout(() => {
         router.push('/campaigns')
       }, 3000)
+      setLoading(false)
     } catch (error) {
       toast.error(error.response.data.error)
+      setLoading(false)
     }
   }
 
@@ -104,6 +102,11 @@ export default function Home() {
             Advertising Campaign
           </h1>
 
+          <div className="mt-5">
+            <p className="font-bold mb-4">Upload Campaign Images</p>
+            <FileUpload images={images} setImages={setImages} />
+          </div>
+
           <InputField onChange={onChangeHandler} title="Name" />
           <div className="my-5">
             <label className="mb-10 font-bold">Select Campaign Date</label>
@@ -128,16 +131,6 @@ export default function Home() {
             title="Daily Budget"
             onChange={onChangeHandler}
           />
-          <div className="mt-5">
-            <p className="font-bold mb-4">Upload Campaign Images</p>
-            <FileUpload
-              setFormData={setFormData}
-              formData={formdata}
-              images={images}
-              setImages={setImages}
-              onChange={onChangeHandler}
-            />
-          </div>
 
           <div className="flex justify-center items-center w-full text-center">
             {loading ? (

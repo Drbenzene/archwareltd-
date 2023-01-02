@@ -1,7 +1,13 @@
 import React from 'react'
 import ImageUploading from 'react-images-uploading'
 
-function FileUpload({ setImages, images, setFormData, formData }) {
+function FileUpload({
+  setImages,
+  images,
+  onChangeHandler,
+  setFormData,
+  formData,
+}) {
   const maxNumber = 69
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -29,7 +35,6 @@ function FileUpload({ setImages, images, setFormData, formData }) {
         }) => (
           <div className="upload__image-wrapper">
             <button
-              onChange={onchangeHandler}
               className="border text-gray-50 mr-5 "
               style={{
                 backgroundColor: isDragging ? 'green' : '#fff',

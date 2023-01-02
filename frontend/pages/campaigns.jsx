@@ -19,7 +19,9 @@ function campaigns() {
 
   const getCampaigns = async () => {
     setLoading(true)
-    const { data } = await axios.get('https://archwareltd-apii.onrender.com/api/campaign/all')
+    const { data } = await axios.get(
+      'https://archwareltd-apii.onrender.com/api/campaign/all',
+    )
     setCampaigns(data.campaigns)
     setLoading(false)
   }
